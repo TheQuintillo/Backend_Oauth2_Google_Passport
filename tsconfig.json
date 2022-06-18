@@ -4,6 +4,14 @@
       "module": "commonjs",
       "outDir": "./dist",
       "strict": true,
+
+      "noImplicitAny": true,
+      "noImplicitThis": true,
+      "strictNullChecks": false,
+      "strictFunctionTypes": true,
+      "noEmit": true,
+
+
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
@@ -14,7 +22,9 @@
       "baseUrl": ".",
       "paths": {
         "@src/*": ["src/*"],
-        "@routes/*": ["src/routes/*"]
+        "@routes/*": ["src/routes/*"],
+        "@services/*": ["src/services/*"],
+        "@controllers/*": ["src/controllers/*"]
       },
     },
     "ts-node": {
@@ -24,6 +34,15 @@
           "rootDir": "."
         }
       },
+      "include": [
+        "./src/*",
+    ],
+      "files": [
+        "package.json",
+        "index.d.ts",
+        "src/routes/RoutesWeb.ts",
+        "src/services/Auth.service.ts",
+    ]
 }
 
 
