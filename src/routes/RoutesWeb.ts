@@ -14,7 +14,7 @@ router.use(session({
     resave: true,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000000000,
+        maxAge: (365 * 2 * 24 * 120 * 1000),
         domain: 'localhost',
     } }));
 router.use(passport.initialize());
@@ -32,10 +32,7 @@ router.get('/', (req, res, next)=>{
     console.log(req)
     req.session.regenerate
 });
-router.get('/*', (req, res)=>{
-    res.status(404).sendFile(path.join(__dirname, 'CARPETA', '404.html'));
-    res.status(404).send('PAGINA NO ENCONTRADA 404.HTML');
-})
+
 
 ///////// ROUTES AUTHENTICATION WITH GOOGLE.COM /////////////
 router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
@@ -55,5 +52,10 @@ router.get('/logout', function(req, res) {
        res.redirect('/') // cannot access session here
       })
 });
+
+router.get('/*', (req, res)=>{
+    res.status(404).sendFile(path.join(__dirname, 'CARPETA', '404.html'));
+    res.status(404).send('PAGINA NO ENCONTRADA 404.HTML');
+})
 
 export default router
