@@ -10,8 +10,7 @@
       "strictNullChecks": false,
       "strictFunctionTypes": true,
       "noEmit": true,
-
-
+      "lib": ["esnext", "dom"],
       "esModuleInterop": true,
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
@@ -24,7 +23,8 @@
         "@src/*": ["src/*"],
         "@routes/*": ["src/routes/*"],
         "@services/*": ["src/services/*"],
-        "@controllers/*": ["src/controllers/*"]
+        "@controllers/*": ["src/controllers/*"],
+        "@middlewares/*": ["src/middlewares/*"]
       },
     },
     "ts-node": {
@@ -35,14 +35,20 @@
         }
       },
       "include": [
-        "./src/*",
+        "./src/*", "PrismaCreateUser.middleware.ts",
     ],
       "files": [
         "package.json",
         "index.d.ts",
-        "src/routes/RoutesWeb.ts",
+        "src/routes/RoutesIndex.ts",
         "src/services/Auth.service.ts",
-    ]
+    ],
+    "[typescript]": {
+      "editor.formatOnPaste": false,
+      "editor.formatOnSave": false,
+    },
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
 }
 
 
