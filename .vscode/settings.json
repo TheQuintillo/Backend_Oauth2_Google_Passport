@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": false,
+    "editor.defaultFormatter": null,
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
+}
