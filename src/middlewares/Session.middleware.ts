@@ -13,7 +13,7 @@ app.use(
       maxAge: 365 * 2 * 24 * 120 * 1000,
       domain: "localhost",
     },
-  })
+  }),
 );
 app.use(passport.initialize());
 app.use(passport.session());
