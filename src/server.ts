@@ -38,4 +38,6 @@ app.use("/*", routeIndex);
 // SERVER ON
 app.use(cors(corsOptions));
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`SERVER ON PORT ${PORT}`);
+});

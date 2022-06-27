@@ -1,7 +1,10 @@
 import "module-alias/register";
 import express from "express";
 import passport from "passport";
-import main from "@middlewares/PrismaCreateUser.middleware";
+/* import main from "@middlewares/PrismaCreateUser.middleware"; */
+import UserController from "@controllers/User.controller";
+
+const userCreate = new UserController();
 
 require("@services/Auth.service");
 
@@ -34,9 +37,9 @@ router.get("/auth/failure", (req, res) => {
 });
 router.get("/protected", isLoggedIn, (req, res) => {
   res.send(
-    `HELLO ${req.user.username} ${req.user.emails} <img src="${req.user.photos}"></img> <a href="/login/logout">LogOut</a>`,
+    `HELLO ${req.user.username} ${req.user.email} <img src="${req.user.photos}"></img> <a href="/login/logout">LogOut</a>`,
   );
-  main(req.user.username, req.user.emails);
+  userCreate.createUser(req.user);
 });
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {

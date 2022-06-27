@@ -41,6 +41,39 @@
                 "allowTaggedTemplates": true,
                 "enforceForJSX": true
             }
+        ],
+        "no-console": [
+            "off",
+            {
+                "allow": []
+            }
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowShortCircuit": true,
+                "allowTernary": true,
+                "allowTaggedTemplates": true
+            }
+        ],
+        "prefer-destructuring": [
+            "warn"
+        ],
+        "no-return-await": [
+            "off"
+        ],
+        "require-await": [
+            "off"
+        ],
+        "@typescript-eslint/return-await": [
+            "off",
+            "never"
         ]
     }
 }

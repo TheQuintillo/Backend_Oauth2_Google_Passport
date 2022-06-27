@@ -29,7 +29,7 @@ const User = {
     callback(null, {
       username: `${id}`,
       provide: `${provider}`,
-      emails: `${email}`,
+      email: `${email}`,
       photos: `${photo}`,
       Token: `${token}`,
       RefreshToken: `${refreshTok}`,

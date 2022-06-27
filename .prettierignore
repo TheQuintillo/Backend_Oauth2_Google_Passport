@@ -1,0 +1,10 @@
+# Server ignores
+node_modules/
+dist/
+
+# Context ignores
+.github/
+.idea/
+# Others
+project/
+coverage/

@@ -7,8 +7,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id       Int    @id @default(autoincrement())
+model users {
+  id       Int    @id @default(autoincrement()) @db.Integer
   username String
   email    String @unique
+  photos   String
+  orders   pedidos[]
+}
+
+model products{
+  id     Int       @id @default(autoincrement()) @db.Integer
+  name   String[]  @unique
+  price  Float
+  colors color[]
+  sizes  size[]
+  photos String
+  orders pedidos[]
+}
+
+model pedidos {
+  id              Int       @id @default(autoincrement()) @db.Integer
+  product         products  @relation(fields: [producto], references: [id])
+  user            users     @relation(fields: [usuario], references: [id])
+  color           color
+  size            size
+  shippingaddress String[]
+  billingaddress  String[]
+  usuario         Int      @db.Integer  // @relation with (_id)  @model: users  @config: MANUAL //
+  producto      Int      @db.Integer
+}
+
+enum color {
+  Red
+  Green
+  Blue
+}
+
+enum size {
+  Small
+  Medium
+  Large
+  XLarge
 }

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+/* import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -24,4 +24,4 @@ async function main(name: string, emails: string) {
   prisma.$disconnect();
 }
 
-export default main;
+export default main; */
