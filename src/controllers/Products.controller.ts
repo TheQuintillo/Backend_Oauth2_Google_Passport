@@ -58,7 +58,7 @@ export default class ProductsController {
    * @description Delete a user by id.
    * @param {TQProduct} query
    * @throws {ErrorServer} User not found.
-   * @returns User. */
+   * @returns; User. */
   async deleteUser(query: TQProduct) {
     await this.findUser(query);
     return await this.model.delete(query);
