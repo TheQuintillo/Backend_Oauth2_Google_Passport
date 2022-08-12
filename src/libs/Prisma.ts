@@ -6,6 +6,9 @@ interface IParams {
     data?: {
         [key: string]: any
     }
+    include?: {
+        [key: string]: boolean
+    }
     where?: {
         AND?: Array<{
             [key: string]: any
