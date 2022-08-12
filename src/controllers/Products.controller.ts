@@ -9,7 +9,7 @@ export default class ProductsController {
    * @description Find users.
    * @param {TQProduct} query
    * @returns Users array. */
-  async findProducts(query?: TQProduct) {
+  async findUsers(query?: TQProduct) {
     return await this.model.findMany(query);
   }
 
@@ -18,10 +18,10 @@ export default class ProductsController {
    * @param {TQProduct} query
    * @throws {ErrorServer} User not found.
    * @returns User. */
-  async findProduct(query: TQProduct) {
-    const product = await this.model.findUnique(query);
-    if (!product) throw new ErrorServer("NOT_FOUND", "Product not found.");
-    return product;
+  async findUser(query: TQProduct) {
+    const user = await this.model.findUnique(query);
+    if (!user) throw new ErrorServer("NOT_FOUND", "User not found.");
+    return user;
   }
 
   /**
@@ -30,17 +30,15 @@ export default class ProductsController {
    * @param {TPPost} payload
    * @returns User. */
   // eslint-disable-next-line consistent-return
-  async createProduct({ ...payload }: TPProduct) {
-    const product = await this.model.findUnique({ name: payload.name });
-    console.log(product);
-    if (product !== null) {
-      return product;
+  async createUser({ ...payload }: TPProduct) {
+    const user = await this.model.findUnique({ email: payload.email });
+    console.log(user);
+    if (user !== null) {
+      return user;
     }
     return await this.model.create({
-      name: payload.name,
-      price: payload.price,
-      colors: payload.colors,
-      sizes: payload.sizes,
+      username: payload.username,
+      email: payload.email,
       photos: payload.photos,
     });
   }
@@ -51,8 +49,8 @@ export default class ProductsController {
    * @param {TPProduct} payload
    * @throws {ErrorServer} User not found.
    * @returns User. */
-  async updateProduct(query: TQProduct, payload: TPProduct) {
-    await this.findProduct(query);
+  async updateUser(query: TQProduct, payload: TPProduct) {
+    await this.findUser(query);
     return await this.model.update(query, payload);
   }
 
@@ -60,9 +58,9 @@ export default class ProductsController {
    * @description Delete a user by id.
    * @param {TQProduct} query
    * @throws {ErrorServer} User not found.
-   * @returns; User. */
-  async deleteProduct(query: TQProduct) {
-    await this.findProduct(query);
+   * @returns User. */
+  async deleteUser(query: TQProduct) {
+    await this.findUser(query);
     return await this.model.delete(query);
   }
 }

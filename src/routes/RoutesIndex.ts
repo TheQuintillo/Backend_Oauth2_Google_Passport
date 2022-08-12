@@ -15,8 +15,4 @@ router.get("/*", (req, res) => {
   res.status(404).send("PAGINA NO ENCONTRADA 404.HTML");
 });
 
-router.get("/login/protected", (req, res) => {
-  res.status(401).send("Necesita Iniciar Sesión");
-});
-
 export default router;

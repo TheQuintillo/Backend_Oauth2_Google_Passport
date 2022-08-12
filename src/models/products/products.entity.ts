@@ -16,9 +16,10 @@ export type TQProduct = {
 }
 
 export type TPProduct = {
-    name?: String
-    price?: String
-    colors?: String
-    sizes?: String
-    photos?: Number
+    product?: String
+    color?: String
+    size?: String
+    shippingAddress?: String;
+    billingAddress?: String;
+    productId?: Number;
 }

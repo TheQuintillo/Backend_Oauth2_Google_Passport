@@ -11,11 +11,16 @@ require("@services/Auth.service");
 const router = express.Router();
 
 /// ///////// FUNCTION isLoggedIn /////////////
-export const isLoggedIn = (req: any, res: any, next: any) => {
-  req.user ? next() : res.send(`Necesita iniciar Sesion <a href="/">Click Aquí</a>`);
+const isLoggedIn = (req: any, res: any, next: any) => {
+  req.user ? next() : res.sendStatus(401);
 };
 
-// ////// ROUTES AUTHENTICATION WITH GOOGLE.COM /////////////
+/// /////// ROUTES RAIZ & 'NOT FOUND' ///////////
+router.get("^/$|index(.html)?", (req, res) => {
+  res.send('<a href="auth/google">AUTH CON GOOGLE LOGIN</a>');
+});
+
+/// ////// ROUTES AUTHENTICATION WITH GOOGLE.COM /////////////
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] }),
@@ -34,10 +39,8 @@ router.get("/protected", isLoggedIn, (req, res) => {
   res.send(
     `HELLO ${req.user.username} ${req.user.email} <img src="${req.user.photos}"></img> <a href="/login/logout">LogOut</a>`,
   );
-
   userCreate.createUser(req.user);
 });
-
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     res.redirect("/");

@@ -15,7 +15,7 @@ const app = express();
 const env = dotenv.config();
 dotenvExpand.expand(env);
 
-// SESSION USER
+/// ///// SESSION USER /////////
 app.use(sessionAuth);
 
 // PORT

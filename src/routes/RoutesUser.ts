@@ -1,23 +1,22 @@
 import "module-alias/register";
 import express from "express";
-import { isLoggedIn } from "./RoutesAuthGoogle";
 
 const router = express.Router();
 
 /// /////// ROUTES RAIZ & 'NOT FOUND' ///////////
 
-router.get("/", isLoggedIn, (req, res) => {
+router.get("/", (req, res) => {
   res.send(
-    '<a href="/user/profile">PERFIL</a> Y <a href="/user/panel">PANEL</a>',
+    '<a href="user/profile">PERFIL</a> Y <a href="user/panel">PANEL</a>',
   );
 });
 
-router.get("/profile", isLoggedIn, (req, res) => {
+router.get("/profile", (req, res) => {
   res.send("BIENVENIDOS AL PERFIL DE USUARIO");
 });
 
-router.get("/panel", isLoggedIn, (req, res) => {
-  res.send(`Registra un nuevo Producto: `);
+router.get("/panel", (req, res) => {
+  res.send("BIENVENIDOS AL PANEL DEL USUARIO");
 });
 
 export default router;
