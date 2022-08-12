@@ -1,59 +1,62 @@
 import Model from "@models/Model";
-import { IProduct, TQProduct, TPProduct } from "./products.entity";
+import { IOrder, TQOrder, TPOrder } from "./orders.entity";
 
 /**
  * @class User
  * @extends Model
  * @description User Model Class. */
-export default class Product extends Model<IProduct, TQProduct, TPProduct> {
+export default class Order extends Model<IOrder, TQOrder, TPOrder> {
   /**
    * @constructor
    * @description Generate link to Prisma model. */
   constructor() {
-    super("products");
+    super("pedidos");
   }
 
   /**
    * @description Find pool of users.
-   * @param {TQProduct} query Query to find users.
+   * @param {TQOrder} query Query to find users.
    * @returns User array. */
-  async findMany(query?: TQProduct) {
+  async findMany(query?: TQOrder) {
     return [
-      await this.client.findMany({ where: query }),
+      await this.client.findMany({
+        where: query,
+        include: { user: true, product: true },
+      }),
       await this.client.count(),
     ];
   }
 
   /**
    * @description Find a user.
-   * @param {TQProduct} query Query to find user.
+   * @param {TQOrder} query Query to find user.
    * @returns User. */
-  async findUnique(query: TQProduct) {
+  async findUnique(query: TQOrder) {
     return await this.client.findUnique({ where: query });
   }
 
   /**
    * @description Create a user.
-   * @param {TPProduct} payload Payload to create a user.
+   * @param {TPOrder} payload Payload to create a user.
    * @returns User. */
-  async create(payload: TPProduct) {
+  async create(payload: TPOrder) {
     return await this.client.create({ data: payload });
   }
 
   /**
    * @description Update a user.
-   * @param {TQProduct} query Query to find user.
-   * @param {TPProduct} payload Payload to create a user.
+   * @param {TQOrder} query Query to find user.
+   * @param {TPOrder} payload Payload to create a user.
    * @returns User. */
-  async update(query: TQProduct, payload: TPProduct) {
+  async update(query: TQOrder, payload: TPOrder) {
     return await this.client.update({ where: query, data: payload });
   }
 
   /**
    * @description Delete a user.
-   * @param {TQProduct} query Query to find user.
+   * @param {TQOrder} query Query to find user.
    * @returns User. */
-  async delete({ id }: TQProduct) {
+  async delete({ id }: TQOrder) {
     return await this.client.delete({ where: { id } });
   }
 }

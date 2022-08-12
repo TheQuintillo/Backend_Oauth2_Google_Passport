@@ -8,33 +8,33 @@ datasource db {
 }
 
 model users {
-  id       Int    @id @default(autoincrement()) @db.Integer
+  id       Int       @id @default(autoincrement()) @db.Integer
   username String
-  email    String @unique
+  email    String    @unique
   photos   String
   orders   pedidos[]
 }
 
-model products{
+model products {
   id     Int       @id @default(autoincrement()) @db.Integer
   name   String[]  @unique
-  price  Float
+  price  String[]
   colors color[]
   sizes  size[]
-  photos String
+  photos String[]
   orders pedidos[]
 }
 
 model pedidos {
-  id              Int       @id @default(autoincrement()) @db.Integer
-  product         products  @relation(fields: [producto], references: [id])
-  user            users     @relation(fields: [usuario], references: [id])
+  id              Int      @id @default(autoincrement()) @db.Integer
+  product         products @relation(fields: [producto], references: [id])
+  user            users    @relation(fields: [usuario], references: [id])
   color           color
   size            size
   shippingaddress String[]
   billingaddress  String[]
-  usuario         Int      @db.Integer  // @relation with (_id)  @model: users  @config: MANUAL //
-  producto      Int      @db.Integer
+  usuario         Int      @db.Integer // @relation with (_id)  @model: users  @config: MANUAL //
+  producto        Int      @db.Integer
 }
 
 enum color {

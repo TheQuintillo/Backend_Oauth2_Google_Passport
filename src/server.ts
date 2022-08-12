@@ -15,7 +15,7 @@ const app = express();
 const env = dotenv.config();
 dotenvExpand.expand(env);
 
-/// ///// SESSION USER /////////
+// SESSION USER
 app.use(sessionAuth);
 
 // PORT
@@ -28,6 +28,7 @@ app.use(morgan("combined"));
 app.use("/", express.static(path.join(__dirname, "/public")));
 
 // ROUTES
+app.use(express.urlencoded({extended : false}));
 app.use("/user", routeUser);
 app.use("/login", routeAuthGoogle);
 
