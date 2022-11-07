@@ -21,6 +21,8 @@ app.use(sessionAuth);
 // PORT
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json({ limit: "25mb" }));
+app.use(express.urlencoded({ limit: "25mb", extended: true }));
 // MORGAN LOGS
 app.use(morgan("combined"));
 
@@ -28,7 +30,6 @@ app.use(morgan("combined"));
 app.use("/", express.static(path.join(__dirname, "/public")));
 
 // ROUTES
-app.use(express.urlencoded({extended : false}));
 app.use("/user", routeUser);
 app.use("/login", routeAuthGoogle);
 

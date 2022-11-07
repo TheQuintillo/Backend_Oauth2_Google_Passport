@@ -4,7 +4,7 @@ import ErrorServer from '@controllers/ErrorServer.controller';
 
 interface IParams {
     data?: {
-        [key: string]: any
+        [key: string]: any,
     }
     include?: {
         [key: string]: boolean

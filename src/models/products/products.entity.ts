@@ -10,15 +10,15 @@ export interface IProduct {
 }
 
 export type TQProduct = {
-    id?: Number
+    id: Number
     name?: String
     order?: Object
 }
 
 export type TPProduct = {
-    name?: Boolean
-    price?: Number
-    colors?: String
-    sizes?: String
-    photos?: String
+    name: String
+    price: String
+    colors: String
+    sizes: String
+    photos: String
 }

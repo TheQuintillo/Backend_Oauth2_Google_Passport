@@ -4,19 +4,13 @@ import { isLoggedIn } from "./RoutesAuthGoogle";
 import ProductsController from "../controllers/Products.controller";
 import OrdersController from "@src/controllers/Orders.controller";
 import app from "@src/middlewares/Session.middleware";
-import { PrismaClient } from "@prisma/client";
-import { nextTick } from "process";
-import { json } from "stream/consumers";
+import cookieParser, { JSONCookie } from "cookie-parser";
 
 const router = express.Router();
 
-//const prisma = new PrismaClient();
-
 const newProduct = new ProductsController();
 const newOrder = new OrdersController();
-const prisma = new PrismaClient();
 /// /////// ROUTES RAIZ & 'NOT FOUND' ///////////
-
 router.get("/", (req, res) => {
   res.send(
     '<a href="/user/profile">PERFIL</a> Y <a href="/user/panel">PANEL</a>',
@@ -29,7 +23,7 @@ router.get("/profile", (req, res) => {
 
 router.get("/panel", (req, res) => {
   res.send(`Registra un nuevo Producto: 
-  <form action="/user/products/add" method="POST">
+  <form action="/user/product/add" method="POST">
   <input type="text" placeholder="Nombre del Producto" name="name">
   <input type="number" placeholder="Precio del Producto" name="price">
   <input type="text" placeholder="Color del Producto" name="colors">
@@ -85,8 +79,7 @@ router.get("/products/:id", async (req, res, next) => {
 router.delete("/products/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deleteProduct = await newProduct.deleteProduct( { id: Number(id) });
-    res.json(deleteProduct);
+    await newProduct.deleteProduct({ id: Number(id) });
     res.send("DELETED");
   } catch (error) {
     next(error);
@@ -103,7 +96,7 @@ router.patch("/products/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-})
+});
 
 router.get("/order/", async (req, res, next) => {
   try {

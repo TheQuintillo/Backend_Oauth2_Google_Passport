@@ -27,7 +27,7 @@ model products {
 
 model pedidos {
   id              Int      @id @default(autoincrement()) @db.Integer
-  product         products @relation(fields: [producto], references: [id])
+  product         products @relation(fields: [producto], references: [id], onDelete: Cascade, onUpdate: Cascade)
   user            users    @relation(fields: [usuario], references: [id])
   color           color
   size            size

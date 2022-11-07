@@ -36,36 +36,7 @@ const User = {
     });
   },
 };
-passport.use(
-  new google.OAuth2Strategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: process.env.PASSPORT_GOOGLE_CALLBACK_URL,
-    },
-    (
-      accessToken: string,
-      refreshToken: string,
-      profile: google.Profile,
-      done: (error: any, user?: any) => void,
-    ) => {
-      User.findOrCreate(
-        profile.displayName,
-        profile.provider,
-        profile.emails[0].value,
-        profile.photos[0].value,
-        accessToken,
-        refreshToken,
-        (err, user) => {
-          if (err) {
-            done(err);
-          }
-          done(null, user);
-        },
-      );
-    },
-  ),
-);
+
 passport.use(
   new google.OAuth2Strategy(
     {

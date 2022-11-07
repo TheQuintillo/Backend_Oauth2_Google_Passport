@@ -1,14 +1,18 @@
 import "module-alias/register";
-import express from "express";
+import express, { request } from "express";
 import passport from "passport";
 /* import main from "@middlewares/PrismaCreateUser.middleware"; */
 import UserController from "@controllers/User.controller";
+import cookie from 'cookie';
+import cookieParser from "cookie-parser";
 
 const userCreate = new UserController();
 
 require("@services/Auth.service");
 
 const router = express.Router();
+
+router.use(cookieParser('newToken', {decode: 'newToken'}));
 
 /// ///////// FUNCTION isLoggedIn /////////////
 export const isLoggedIn = (req: any, res: any, next: any) => {
@@ -31,10 +35,12 @@ router.get("/auth/failure", (req, res) => {
   res.send("FALLO EN LA AUTHENTICATION");
 });
 router.get("/protected", isLoggedIn, (req, res) => {
+  res.setHeader('Set-Cookie', cookie.serialize('token', req.user.Token, {maxAge: 60 * 60 * 24 * 7, httpOnly: true, secure: true}))
+  //res.cookie('new-Token', req.user.Token, {path: '/login', maxAge: 7, httpOnly: true, secure: true, })
+  console.log(req);
   res.send(
     `HELLO ${req.user.username} ${req.user.email} <img src="${req.user.photos}"></img> <a href="/login/logout">LogOut</a>`,
   );
-
   userCreate.createUser(req.user);
 });
 

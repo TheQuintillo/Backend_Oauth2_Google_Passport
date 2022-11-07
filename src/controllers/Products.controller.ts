@@ -63,7 +63,8 @@ export default class ProductsController {
    * @throws {ErrorServer} User not found.
    * @returns; User. */
   async deleteProduct(query: TQProduct) {
-    await this.findProduct(query);
+    const productDeleted = await this.findProduct(query);
+    console.log(productDeleted);
     return await this.model.delete(query);
   }
 }
